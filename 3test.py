@@ -2,7 +2,7 @@
 # соответствие шаблона
 
 import cv2
-
+import sys
 import numpy as np
 from imutils.video import VideoStream
 import imutils
@@ -13,7 +13,9 @@ vs = VideoStream(src=0, usePiCamera=False, resolution=(1024, 720), framerate=32)
 sleep(2)
 
 # Прочитайте шаблон
-template__ = cv2.imread('white1.png',0)
+if len(sys.argv) != 2:
+    exit()
+template__ = cv2.imread(sys.argv[1] , 0)
 
 # def rotation(template):
 #     for deg in range(0, 360):
@@ -52,20 +54,37 @@ def getContourse(template):
     threshold = 0.8
   
     # Сохранять координаты совпадающей области в массиве
+    loc = None
     loc = np.where( res >= threshold) 
     flag = False
     # Нарисуйте прямоугольник вокруг соответствующей области.
-    for pt in zip(*loc[::-1]):
-        flag = True
-        cv2.rectangle(img_rgb, pt, (pt[0] + w, pt[1] + h), (0,255,255), 2, 8, 0)
+    if loc is not None:
+        string = ""
+        for pt in zip(*loc[::-1]):
+            flag = True
+            string += str(pt[0])
+            string += " "
+            string += str(pt[1])
+            string += ", "
+            string += str(w)
+            string += ", "
+            string += str(h)
+            string += "\n"
+            cv2.rectangle(img_rgb, pt, (pt[0] + w, pt[1] + h), (0,255,255), 2, 8, 0)
+        if string != "":
+            file = open('result.txt', "w")
+            file.write(string)
+            file.close()    
     return flag
 
+stop_flag = False
 while True:
     img_rgb = vs.read()
     img_rgb = cv2.GaussianBlur(img_rgb, (3, 3), 0)
-    resize(25)
-    # Показать окончательное изображение с соответствующей области.
-    cv2.imshow('krasivoe',img_rgb)
+    if stop_flag == False:
+        stop_flag = resize(25)
+        # Показать окончательное изображение с соответствующей области.
+        cv2.imshow('krasivoe',img_rgb)
     if cv2.waitKey(1) == 27:
         break
 vs.stop()
