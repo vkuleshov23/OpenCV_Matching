@@ -42,7 +42,6 @@ def getContourse(template):
     # Преобразовать его в оттенки серого
     img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
   
-    
     # Сохраняем ширину и высоту шаблона в ш и ч
     w, h = template.shape[::-1]
   
@@ -63,6 +62,7 @@ def getContourse(template):
 
 while True:
     img_rgb = vs.read()
+    img_rgb = cv2.GaussianBlur(img_rgb, (3, 3), 0)
     resize(25)
     # Показать окончательное изображение с соответствующей области.
     cv2.imshow('krasivoe',img_rgb)
