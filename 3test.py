@@ -170,6 +170,8 @@ def getContourse(template):
 stop_flag = False
 i = 0
 while True:
+# while i != 1:
+    i = 1
     #сделать снимок экрана
     img_rgb = vs.read()
     #добавление размытости
@@ -182,13 +184,15 @@ while True:
         stop_flag = findingWithResize(20, 5)
         #нарисовка рамок и координат
         print_result()
-        #отчиска списка (для отладки)
-        clearAverageLists()
         #запись результатов в файл
         file = open('result.txt', "w")
+        print(getDataForFILE())
         file.write(getDataForFILE())
         file.close()
         # Показать окончательное изображение с соответствующей области.
+        #отчиска списка (для отладки)
+        clearAverageLists()
+        #ОТОБРАЗИТЬ ИЗОБРАЖЕНИЕ
         cv2.imshow('krasivoe',img_rgb)
     #чтобы закрыть окно
     if cv2.waitKey(1) == 27:
