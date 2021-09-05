@@ -67,7 +67,7 @@ def addAveragePoint(points, minDif, w, h):
     average_points.append(point)
     average_sizes.append((w,h))
 
-#очистка списка (нужна, пока используется запись камеры, а не фото)
+#очистка списка (нужна, пока используется запись камеры а не фото)
 def clearAverageLists():
     average_sizes.clear()
     average_points.clear()
@@ -119,7 +119,7 @@ def findingWithResize(MinPercent, module):
 #Поиск шаблона
 def getContourse(template):
   
-    # Сохраняем ширину и высоту шаблона в ш и ч
+    # Сохраняем ширину и высоту шаблона
     w, h = template.shape[::-1]
   
     # Выполнять операции сопоставления.
@@ -136,7 +136,7 @@ def getContourse(template):
 
     #инициализация флага о входе в цикл
     flag_about_in = False
-    #инициализация списка для 1го изображения
+    #инициализация списка для одного изображения
     points = []
     #инициализация минимума точки, при которой мы будем проверять, полагая, что это одно изображение
     minimum = (999999, 99999)
