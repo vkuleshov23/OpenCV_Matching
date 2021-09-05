@@ -7,6 +7,12 @@ import numpy as np
 from imutils.video import VideoStream
 import imutils
 from time import sleep
+
+#Проверка, что аргумент (шаблон) был передан
+if len(sys.argv) != 2:
+    print("have no argument!    (png, jpg, ...)")
+    exit()
+
 # Читать основное изображение
 #img_rgb = cv2.imread('mainimage.jpg').
 vs = VideoStream(src=0, usePiCamera=False, resolution=(1024, 720), framerate=32).start()
@@ -20,10 +26,6 @@ average_sizes = []
 #костанта, зачащая допустимую разницу размера, при котором не будет записываться новое значение
 # Пример: (точка 100, 100 не будет записыаться, если имеются точки: (100-difference, 100), (100, 100-difference), (100-difference, 100-difference), (100+difference, 100), ...) 
 difference = 20
-#Проверка, что аргумент (шаблон) был передан
-if len(sys.argv) != 2:
-    print("have no argument!    (png, jpg, ...)")
-    exit()
 
 # Прочитайте шаблон
 template__ = cv2.imread(sys.argv[1] , 0)
