@@ -9,7 +9,7 @@ import imutils
 from time import sleep
 
 #Проверка, что аргумент (шаблон) был передан
-if len(sys.argv) != 2:
+if len(sys.argv) < 2:
     print("have no argument!    (png, jpg, ...)")
     exit()
 
